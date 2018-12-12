@@ -10,8 +10,10 @@ html(lang="en")
 
 
     body
+        include ../bemto/bemto.pug
 
-        h2.message 
-            |Hello World!
+        +b.block
+            +e.H2.element 
+                |Hello World!
 
         script(src='js/main.js' defer)
