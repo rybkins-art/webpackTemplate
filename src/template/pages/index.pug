@@ -5,15 +5,9 @@ html(lang="en")
         block title
             title webpack Project
 
-        //Main project style
-        link(rel='stylesheet' href='css/main.css')
-
-
     body
         include ../bemto/bemto.pug
 
         +b.block
             +e.H2.element 
                 |Hello World!
-
-        script(src='js/main.js' defer)

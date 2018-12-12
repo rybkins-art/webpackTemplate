@@ -1,3 +1,5 @@
-.message {
-    color: red
+.block {
+    &__element {
+        color: red;
+    }
 }
