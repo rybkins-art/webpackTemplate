@@ -1,9 +1,11 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -23,12 +25,24 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-            MiniCssExtractPlugin.loader,
-            // "style-loader", // style nodes from js strings
-            "css-loader",
-            "sass-loader"
-        ]
+        use: [{
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+              sourceMap: true
+          }
+        },
+        {
+            loader: "css-loader",
+            options: {
+                sourceMap: true
+            }
+        },
+        {
+            loader: "sass-loader",
+            options: {
+                sourceMap: true
+            }
+        }]
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
@@ -44,6 +58,11 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery/dist/jquery.min.js",
+      jQuery: "jquery/dist/jquery.min.js",
+      "window.jQuery": "jquery/dist/jquery.min.js"
+    }),
     new HtmlWebPackPlugin({
       template: "./src/template/pages/index.pug",
       filename: "./index.html"
